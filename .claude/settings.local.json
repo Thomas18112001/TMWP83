@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:toulon-water-pulse.base44.app)",
+      "Bash(curl -s \"https://toulon-water-pulse.base44.app/\")",
+      "Bash(curl -s \"https://toulon-water-pulse.base44.app/assets/index-Dj9jHwcS.css\")",
+      "Bash(curl -s \"https://toulon-water-pulse.base44.app/assets/index-DhmPiLNi.js\")",
+      "Bash(curl -s \"https://toulon-water-pulse.base44.app/\" -H \"User-Agent: Mozilla/5.0\")",
+      "Read(//tmp/**)",
+      "Bash(curl -s https://toulon-water-pulse.base44.app/)",
+      "Bash(curl -s https://toulon-water-pulse.base44.app/assets/index-Dj9jHwcS.css)",
+      "Bash(curl -s https://toulon-water-pulse.base44.app/assets/index-DhmPiLNi.js)",
+      "Bash(curl -s https://toulon-water-pulse.base44.app/sitemap.xml)",
+      "Bash(curl -s https://toulon-water-pulse.base44.app/robots.txt)",
+      "Bash(npx tsc *)",
+      "Bash(sshpass -p KUyv8qPrWcRVXG ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10 root@212.227.86.233 ' *)",
+      "Bash(python3 -c \"import subprocess; print\\('python ok'\\)\")",
+      "Bash(pip install *)",
+      "Bash(python3 -)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(tar --exclude='./node_modules' --exclude='./.next' --exclude='./.git' --exclude='./.env*' --exclude='./base44.css' -czf /tmp/tmwp83-deploy.tar.gz .)",
+      "Bash(tar --exclude='./node_modules' --exclude='./.next' --exclude='./.git' --exclude='./.env*' --exclude='./base44.css' --exclude='./public/images' --exclude='./public/generated' -czf /tmp/tmwp83-src.tar.gz .)",
+      "Bash(python deploy.py)",
+      "Bash(tar --exclude='./node_modules' --exclude='./.next' --exclude='./.git' --exclude='./.env*' --exclude='./base44.css' --exclude='./public/images' --exclude='./public/generated' -czf \"C:/Users/Thoma/AppData/Local/Temp/tmwp83-src.tar.gz\" .)",
+      "Bash(tar --exclude='./node_modules' --exclude='./.next' --exclude='./.git' --exclude='./.env*' --exclude='./base44.css' --exclude='./public/images' --exclude='./public/generated' -czf ~/tmwp83-src.tar.gz .)",
+      "Read(//c/Users/Thoma/**)",
+      "Bash(python3 -c ' *)",
+      "Bash(tar tzf *)"
+    ]
+  }
+}
