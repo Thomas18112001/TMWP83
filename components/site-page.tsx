@@ -5,8 +5,11 @@ import Link from "next/link";
 import { type CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
+  BarChart3,
   CalendarDays,
   Clock3,
+  Flag,
+  GraduationCap,
   Mail,
   MapPin,
   Medal,
@@ -2300,7 +2303,11 @@ export function SitePage({
 
   return (
     <div>
-      <InnerHero page={page} src={meta.src} ghost={meta.ghost} alt={meta.alt || `Photo water-polo TMWP83 pour la page ${page.title}`} />
+      {page.slug === "le-club" ? (
+        <ClubHero />
+      ) : (
+        <InnerHero page={page} src={meta.src} ghost={meta.ghost} alt={meta.alt || `Photo water-polo TMWP83 pour la page ${page.title}`} />
+      )}
       {page.slug === "le-club"               && <ClubSection ffnStandings={ffnStandings} />}
       {page.slug === "activites"             && <PublicActivitiesSection activities={activities} />}
       {page.slug === "equipe-feminine-elite" && <EliteSection ffnFixtures={ffnFixtures} ffnResults={ffnResults} ffnRoster={ffnRoster} />}
@@ -2372,7 +2379,581 @@ function InnerHero({
 /*  LE CLUB                                                   */
 /* ══════════════════════════════════════════════════════════ */
 
+function ClubHero() {
+  return (
+    <section className="relative min-h-[78vh] overflow-hidden bg-ink">
+      <Image
+        src={IMG.gloves}
+        alt="Coach du Toulon Metropole Water-Polo 83 au bord du bassin"
+        fill
+        sizes="100vw"
+        className="object-cover object-center opacity-78"
+        priority
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/20" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-ink/62 to-transparent" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_24%,rgba(213,36,29,0.18),transparent_28%)]" />
+
+      <div className="absolute inset-x-0 bottom-0">
+        <div className="mx-auto max-w-[1240px] px-4 pb-14 sm:px-6 md:pb-[72px] lg:px-8 lg:pb-24">
+          <Reveal>
+          <div className="flex max-w-3xl items-start gap-5">
+            <div className="mt-1 w-1 self-stretch bg-ember" />
+            <div>
+              <p className="mb-4 text-xs font-bold uppercase tracking-[0.38em] text-ember">
+                Le club
+              </p>
+              <h1 className="break-words text-5xl font-black uppercase leading-none tracking-tight text-white sm:text-6xl lg:text-[6.2rem]">
+                LE CLUB
+              </h1>
+              <p className="mt-5 max-w-2xl text-[1.5rem] font-semibold leading-[1.18] text-white sm:text-[1.85rem] lg:text-[2.2rem]">
+                Un club structure, formateur et tourne vers la performance.
+              </p>
+              <p className="mt-6 max-w-2xl text-[15px] leading-8 text-white/88 sm:text-[16px] lg:text-[17px]">
+                Depuis 2010, le Toulon Metropole Water-Polo 83 developpe la pratique du water-polo
+                a tous les niveaux, de l&apos;initiation a l&apos;elite. Porte par une vision ambitieuse
+                et un encadrement exigeant, le club s&apos;impose comme un acteur reconnu du water polo
+                dans le Var et sur la scene nationale.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <Link
+                  href="/equipes"
+                  data-cursor="interactive"
+                  className="button-sheen wave-red inline-flex items-center justify-center rounded-full border border-ember/20 bg-gradient-to-r from-ember via-[#e33b2d] to-wp-red-dark px-7 py-3.5 text-sm font-bold uppercase tracking-[0.16em] text-white shadow-[0_18px_40px_rgba(213,36,29,0.32)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_26px_56px_rgba(213,36,29,0.42)]"
+                >
+                  Decouvrir nos equipes
+                </Link>
+                <Link
+                  href="/contact"
+                  data-cursor="interactive"
+                  className="button-sheen wave-ghost inline-flex items-center justify-center rounded-full border border-white/24 bg-white/8 px-7 py-3.5 text-sm font-bold uppercase tracking-[0.16em] text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-white/45 hover:bg-white/15"
+                >
+                  Nous rejoindre
+                </Link>
+              </div>
+            </div>
+          </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ClubSectionPremium({ ffnStandings }: { ffnStandings: FfnStandingRow[] }) {
+  const toulonStanding = ffnStandings.find((row) => isToulon(null, row.team));
+  const timeline = [
+    { year: "2010", title: "Creation du club" },
+    { year: "2015", title: "Structuration de l'ecole de water-polo" },
+    { year: "2018", title: "Acces aux competitions nationales" },
+    { year: "2022", title: "Developpement de l'elite feminine" },
+    { year: "Aujourd'hui", title: "Consolidation et ambition nationale" },
+  ];
+  const values = [
+    {
+      title: "Exigence",
+      description:
+        "Chaque entrainement est une opportunite de progresser. Nous cultivons la rigueur, la discipline et la recherche constante de performance.",
+      icon: Medal,
+    },
+    {
+      title: "Collectif",
+      description:
+        "Le water-polo est un sport d'equipe. Nous construisons des groupes solidaires ou chacun a un role a jouer.",
+      icon: Users,
+    },
+    {
+      title: "Formation",
+      description:
+        "Former les joueurs d'aujourd'hui et de demain est au coeur de notre projet. Transmission, pedagogie et accompagnement sont essentiels.",
+      icon: GraduationCap,
+    },
+    {
+      title: "Rayonnement",
+      description:
+        "Nous portons les couleurs de Toulon avec fierte, sur le plan local comme national.",
+      icon: Flag,
+    },
+  ];
+  const organization = [
+    {
+      step: "01",
+      title: "Ecole de water-polo",
+      description: "Decouverte, apprentissage et plaisir du jeu pour les plus jeunes.",
+      image: IMG.portrait,
+      alt: "Jeune joueuse du TMWP83 en apprentissage du water-polo",
+    },
+    {
+      step: "02",
+      title: "Jeunes",
+      description: "Accompagner la progression de chacun a travers un parcours de formation adapte.",
+      image: IMG.resort,
+      alt: "Entrainement des jeunes du Toulon Metropole Water-Polo 83",
+    },
+    {
+      step: "03",
+      title: "Equipes seniors",
+      description: "Performance, engagement et representation du club en competitions.",
+      image: IMG.team,
+      alt: "Equipe senior du TMWP83 avant un match",
+    },
+  ];
+  const topStats = [
+    { value: "2010", label: "Creation du club", icon: CalendarDays },
+    { value: "150+", label: "Licencies", icon: Users },
+    { value: "8", label: "Equipes engagees", icon: ShieldCheck },
+    { value: toulonStanding ? `#${toulonStanding.rank}` : "#5", label: "Classement elite feminine", icon: Trophy },
+  ];
+  const impactStats = [
+    { value: "150+", label: "Licencies" },
+    { value: "8", label: "Equipes engagees" },
+    { value: "15", label: "Ans d'existence" },
+    { value: "National", label: "Niveau de competition" },
+  ];
+
+  return (
+    <>
+      <div className="bg-ember">
+        <div className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-px bg-white/15 md:grid-cols-2 xl:grid-cols-4">
+            {topStats.map((s, index) => {
+              const Icon = s.icon;
+
+              return (
+                <Reveal key={s.label} delay={index * 70}>
+                  <div className="group flex min-h-[132px] flex-col items-center justify-center bg-ember px-6 py-8 text-center transition-colors duration-300 hover:bg-[#df3124]">
+                    <div className="mb-4 rounded-2xl bg-white/12 p-3 transition-transform duration-300 group-hover:-translate-y-[3px]">
+                      <Icon className="h-6 w-6 text-white" />
+                    </div>
+                    <p className="text-4xl font-black leading-none text-white transition-transform duration-300 group-hover:scale-[1.03]">
+                      {s.value}
+                    </p>
+                    <p className="mt-3 max-w-[13rem] text-[11px] font-bold uppercase tracking-[0.22em] text-white/92 sm:text-xs">
+                      {s.label}
+                    </p>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      <section className="bg-white py-14 md:py-[72px] lg:py-24">
+        <div className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
+          <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1.1fr)_420px] lg:gap-16">
+            <Reveal>
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.38em] text-ember">Notre histoire</p>
+              <h2 className="mt-4 text-4xl font-black uppercase leading-tight tracking-tight text-ink sm:text-5xl">
+                Un projet ne de la passion
+              </h2>
+              <p className="mt-6 text-[15px] leading-8 text-ink/78 sm:text-[16px] lg:text-[17px]">
+                Cree en 2010, le Toulon Metropole Water-Polo 83 est ne d&apos;une ambition claire :
+                structurer durablement la pratique du water-polo a Toulon et accompagner les joueurs vers le haut niveau.
+              </p>
+              <p className="mt-5 text-[15px] leading-8 text-ink/78 sm:text-[16px] lg:text-[17px]">
+                Des ses debuts, le club s&apos;est construit autour de valeurs fortes : exigence, esprit collectif et transmission.
+                Au fil des saisons, il a su developper une filiere complete, allant de l&apos;ecole de water-polo jusqu&apos;aux equipes
+                engagees en competitions nationales.
+              </p>
+              <p className="mt-5 text-[15px] leading-8 text-ink/78 sm:text-[16px] lg:text-[17px]">
+                Aujourd&apos;hui, ce club de water polo a Toulon s&apos;inscrit dans une dynamique de progression continue, avec une volonte
+                affirmee de former les talents de demain tout en renforcant sa presence sur la scene sportive du water polo Var.
+              </p>
+            </div>
+            </Reveal>
+            <Reveal delay={120}>
+            <div className="relative overflow-hidden rounded-[2rem] border border-ink/8 bg-[#fbfaf8] p-7 shadow-soft sm:p-8">
+              <p className="text-xs font-bold uppercase tracking-[0.3em] text-ember">Dates cles</p>
+              <div className="absolute bottom-8 left-[41px] top-[92px] w-px bg-ember/18" />
+              <div className="relative mt-8 space-y-6">
+                {timeline.slice(0, 4).map((item, index) => (
+                  <Reveal key={item.year} delay={90 + index * 80}>
+                  <div className="flex gap-4 border-b border-ink/8 pb-5 last:border-b-0 last:pb-0">
+                    <div className="relative z-10 mt-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-ember text-sm font-black text-white shadow-[0_12px_24px_rgba(213,36,29,0.24)]">
+                      {item.year.slice(0, 2) === "Au" ? "Now" : item.year.slice(-2)}
+                    </div>
+                    <div>
+                      <p className="text-sm font-black uppercase tracking-[0.16em] text-ink">{item.year}</p>
+                      <p className="mt-1 text-[15px] leading-7 text-ink/72">{item.title}</p>
+                    </div>
+                  </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-shell py-14 md:py-[72px] lg:py-24">
+        <div className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
+          <Reveal>
+          <div className="max-w-3xl">
+            <p className="text-xs font-bold uppercase tracking-[0.38em] text-ember">Notre parcours</p>
+            <h2 className="mt-4 text-3xl font-black uppercase tracking-tight text-ink sm:text-4xl">
+              Une progression construite dans le temps
+            </h2>
+            <p className="mt-5 text-[15px] leading-8 text-ink/74 sm:text-[16px] lg:text-[17px]">
+              Un club sportif Toulon se construit sur la duree. Chaque etape du Toulon Metropole Water-Polo 83 marque un renforcement
+              du projet sportif, de la formation et de la place du club sur la scene nationale.
+            </p>
+          </div>
+          </Reveal>
+          <div className="mt-12">
+            <div className="hidden items-start justify-between gap-4 lg:flex">
+              {timeline.map((item, index) => (
+                <Reveal key={item.year} delay={index * 90}>
+                <div className="group relative flex min-w-0 flex-1 flex-col rounded-[1.5rem] px-4 py-3 transition-colors duration-300 hover:bg-white/70">
+                  {index < timeline.length - 1 && (
+                    <span className="absolute left-[calc(50%+1rem)] top-7 h-[2px] w-[calc(100%-2rem)] bg-ember/18" />
+                  )}
+                  <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border-4 border-white bg-ember shadow-[0_14px_28px_rgba(213,36,29,0.28)] transition-transform duration-300 group-hover:scale-105">
+                    <span className="h-2.5 w-2.5 rounded-full bg-white" />
+                  </div>
+                  <p className="mt-6 text-sm font-black uppercase tracking-[0.16em] text-ink">{item.year}</p>
+                  <p className="mt-3 max-w-[15rem] text-[15px] leading-7 text-ink/72">{item.title}</p>
+                </div>
+                </Reveal>
+              ))}
+            </div>
+            <div className="space-y-5 lg:hidden">
+              {timeline.map((item, index) => (
+                <Reveal key={item.year} delay={index * 80}>
+                <div className="group flex gap-4 rounded-[1.5rem] border border-ink/8 bg-white p-5 shadow-soft transition-all duration-300 hover:border-ember/25 hover:shadow-[0_16px_30px_rgba(17,20,24,0.08)]">
+                  <div className="relative flex w-8 shrink-0 justify-center">
+                    <span className="mt-2 h-3.5 w-3.5 rounded-full bg-ember transition-transform duration-300 group-hover:scale-110" />
+                    {index < timeline.length - 1 && <span className="absolute top-5 h-full w-px bg-ink/10" />}
+                  </div>
+                  <div>
+                    <p className="text-sm font-black uppercase tracking-[0.16em] text-ink">{item.year}</p>
+                    <p className="mt-2 text-[15px] leading-7 text-ink/72">{item.title}</p>
+                  </div>
+                </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#101215] py-14 md:py-[72px] lg:py-24">
+        <div className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
+          <Reveal>
+          <div className="max-w-3xl">
+            <p className="text-xs font-bold uppercase tracking-[0.38em] text-ember">Mission et vision</p>
+            <h2 className="mt-4 text-3xl font-black uppercase tracking-tight text-white sm:text-4xl">
+              Un projet clair, exigeant et durable
+            </h2>
+            <p className="mt-5 max-w-2xl text-[15px] leading-8 text-[#d8d8d8] sm:text-[16px] lg:text-[17px]">
+              Le Toulon Metropole Water-Polo 83 affirme un cap simple : former, structurer et faire progresser.
+              Cette ambition nourrit tout le projet du club, des premiers apprentissages jusqu&apos;au plus haut niveau.
+            </p>
+          </div>
+          </Reveal>
+          <div className="mt-12 rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))] p-6 shadow-soft sm:p-8 lg:p-10">
+            <div className="grid gap-6 lg:grid-cols-3">
+              <div className="rounded-[1.5rem] border border-white/10 bg-[#242424] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-ember/45 hover:shadow-[0_18px_36px_rgba(213,36,29,0.18)]">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-ember/15 text-ember">
+                  <ShieldCheck className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-black uppercase tracking-tight text-white">Notre mission</h3>
+                <p className="mt-4 text-[15px] leading-8 text-[#d8d8d8]">
+                  Former, encadrer et accompagner chaque joueur dans sa progression, quel que soit son niveau,
+                  dans un environnement structure et exigeant.
+                </p>
+              </div>
+              <div className="rounded-[1.5rem] border border-white/10 bg-[#242424] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-ember/45 hover:shadow-[0_18px_36px_rgba(213,36,29,0.18)]">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-ember/15 text-ember">
+                  <Waves className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-black uppercase tracking-tight text-white">Notre vision</h3>
+                <p className="mt-4 text-[15px] leading-8 text-[#d8d8d8]">
+                  Faire du Toulon Metropole Water-Polo 83 un club de reference, reconnu pour la qualite
+                  de sa formation et la performance de ses equipes.
+                </p>
+              </div>
+              <div className="rounded-[1.5rem] border border-white/10 bg-[#242424] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-ember/45 hover:shadow-[0_18px_36px_rgba(213,36,29,0.18)]">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-ember/15 text-ember">
+                  <BarChart3 className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-black uppercase tracking-tight text-white">Notre positionnement</h3>
+                <ul className="mt-4 space-y-3 text-[15px] leading-8 text-[#d8d8d8]">
+                  {["Formation durable", "Performance sportive", "Rayonnement territorial et national"].map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-ember" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-14 md:py-[72px] lg:py-24">
+        <div className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
+          <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)] lg:gap-16">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.38em] text-ember">Elite feminine</p>
+              <h2 className="mt-4 text-4xl font-black uppercase leading-tight tracking-tight text-ink sm:text-5xl">
+                Un collectif engage au plus haut niveau
+              </h2>
+              <p className="mt-6 max-w-2xl text-[15px] leading-8 text-ink/78 sm:text-[16px] lg:text-[17px]">
+                Engagee en championnat national, l&apos;equipe elite feminine represente l&apos;exigence et l&apos;ambition du club.
+                Chaque saison, l&apos;objectif est clair : progresser, rivaliser avec les meilleures equipes et porter les couleurs du club au plus haut niveau.
+              </p>
+              <div className="mt-8">
+                <Link
+                  href="/equipes/feminine-elite"
+                  className="button-sheen wave-dark inline-flex items-center gap-2 rounded-full border border-ink/10 bg-ink px-7 py-3.5 text-sm font-bold uppercase tracking-[0.16em] text-white transition-all duration-300 hover:-translate-y-1 hover:bg-ember hover:shadow-[0_20px_40px_rgba(213,36,29,0.28)]"
+                >
+                  Voir l'equipe
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+            <div className="overflow-hidden rounded-[2rem] border border-ink/8 bg-ink shadow-soft">
+              <div className="border-b border-white/10 px-6 py-5">
+                <p className="text-xs font-bold uppercase tracking-[0.28em] text-ember">Classement FFN</p>
+              </div>
+              {ffnStandings.length === 0 ? (
+                <div className="px-6 py-10 text-center text-[15px] text-white/75">
+                  Classement non disponible depuis la source FFN pour le moment.
+                </div>
+              ) : (
+                <table className="w-full text-left text-[15px]">
+                  <thead className="bg-white/5">
+                    <tr className="text-xs font-bold uppercase tracking-[0.2em] text-white/65">
+                      <th className="px-5 py-4">#</th>
+                      <th className="px-5 py-4">Equipe</th>
+                      <th className="px-5 py-4 text-center">J</th>
+                      <th className="hidden px-5 py-4 text-center sm:table-cell">V</th>
+                      <th className="hidden px-5 py-4 text-center sm:table-cell">N</th>
+                      <th className="hidden px-5 py-4 text-center sm:table-cell">D</th>
+                      <th className="px-5 py-4 text-center">Pts</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {ffnStandings.map((row) => (
+                      <tr
+                        key={row.rank}
+                        className={
+                          isToulon(null, row.team)
+                            ? "bg-ember/25 text-white"
+                            : "border-t border-white/[0.06] text-white/88 transition-colors duration-200 hover:bg-white/[0.04]"
+                        }
+                      >
+                        <td className="px-5 py-4 font-black text-white/40">{row.rank}</td>
+                        <td className="px-5 py-4 font-black uppercase">{row.team}</td>
+                        <td className="px-5 py-4 text-center">{row.played}</td>
+                        <td className="hidden px-5 py-4 text-center sm:table-cell">{row.won}</td>
+                        <td className="hidden px-5 py-4 text-center sm:table-cell">{row.drawn}</td>
+                        <td className="hidden px-5 py-4 text-center sm:table-cell">{row.lost}</td>
+                        <td className="px-5 py-4 text-center font-black">{row.points}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-shell py-14 md:py-[72px] lg:py-24">
+        <div className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.38em] text-ember">Nos valeurs</p>
+            <h2 className="mt-4 text-3xl font-black uppercase tracking-tight text-ink sm:text-4xl">
+              Quatre piliers, un meme etat d'esprit
+            </h2>
+          </div>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+            {values.map((value) => {
+              const ValueIcon = value.icon;
+
+              return (
+                <article
+                  key={value.title}
+                  data-cursor="interactive"
+                  className="group news-glow interactive-panel rounded-[1.75rem] border border-ink/8 bg-white p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-ember/30 hover:shadow-[0_22px_42px_rgba(17,20,24,0.14)]"
+                >
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-ember/10 text-ember transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-105">
+                    <ValueIcon className="h-7 w-7" />
+                  </div>
+                  <div className="mt-6 h-px w-12 bg-ember/35" />
+                  <h3 className="mt-5 text-xl font-black uppercase tracking-tight text-ink">{value.title}</h3>
+                  <p className="mt-4 text-[15px] leading-8 text-ink/76">{value.description}</p>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-14 md:py-[72px] lg:py-24">
+        <div className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(320px,0.8fr)] lg:items-start">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.38em] text-ember">Organisation du club</p>
+              <h2 className="mt-4 text-3xl font-black uppercase tracking-tight text-ink sm:text-4xl">
+                Une structure complete
+              </h2>
+              <div className="mt-10 grid gap-6 md:grid-cols-3">
+                {organization.map((item) => (
+                  <article
+                    key={item.title}
+                    data-cursor="interactive"
+                    className="group news-glow interactive-panel overflow-hidden rounded-[1.9rem] border border-ink/8 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-ember/25 hover:shadow-[0_22px_40px_rgba(17,20,24,0.12)]"
+                  >
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src={item.image}
+                        alt={item.alt}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                      />
+                    </div>
+                    <div className="p-6">
+                      <p className="text-xs font-bold uppercase tracking-[0.28em] text-ember">{item.step}</p>
+                      <h3 className="mt-3 text-xl font-black uppercase tracking-tight text-ink">{item.title}</h3>
+                      <p className="mt-4 text-[15px] leading-8 text-ink/76">{item.description}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+            <aside className="rounded-[2rem] bg-ink p-8 text-white shadow-soft sm:p-10">
+              <p className="text-xs font-bold uppercase tracking-[0.32em] text-ember">Encadrement</p>
+              <h3 className="mt-4 text-2xl font-black uppercase tracking-tight">Un staff implique</h3>
+              <p className="mt-5 text-[15px] leading-8 text-[#d8d8d8]">
+                Les joueurs sont accompagnes par un staff qualifie, compose d&apos;entraineurs experimentes et impliques
+                dans le developpement sportif et humain des athletes.
+              </p>
+              <div className="mt-8 space-y-4 border-t border-white/10 pt-8">
+                {[
+                  "Encadrement structure selon les categories",
+                  "Suivi de progression et culture collective",
+                  "Exigence sportive et accompagnement humain",
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-3">
+                    <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-ember" />
+                    <p className="text-[15px] leading-7 text-[#d8d8d8]">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-ink py-14 md:py-[72px] lg:py-24">
+        <div className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <p className="text-xs font-bold uppercase tracking-[0.38em] text-ember">Chiffres cles</p>
+            <h2 className="mt-4 text-3xl font-black uppercase tracking-tight text-white sm:text-4xl">
+              Un projet qui compte dans le paysage sportif
+            </h2>
+          </div>
+          <div className="mt-12 grid gap-px bg-white/10 lg:grid-cols-4">
+            {impactStats.map((item) => (
+              <div key={item.label} className="bg-ink px-7 py-10 text-center lg:text-left">
+                <p className="text-5xl font-black uppercase leading-none text-white sm:text-6xl">{item.value}</p>
+                <p className="mt-4 text-xs font-bold uppercase tracking-[0.28em] text-white/72">{item.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-shell py-14 md:py-[72px] lg:py-24">
+        <div className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
+            <div data-cursor="interactive" className="media-glow interactive-panel group overflow-hidden rounded-[2rem] shadow-soft">
+              <Image
+                src={IMG.aerial}
+                alt="Piscine Port Marchand a Toulon"
+                width={900}
+                height={640}
+                className="h-[320px] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03] sm:h-[420px]"
+              />
+            </div>
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.38em] text-ember">Infrastructures</p>
+              <h2 className="mt-4 text-4xl font-black uppercase tracking-tight text-ink sm:text-5xl">
+                Piscine Port Marchand
+              </h2>
+              <p className="mt-6 text-[15px] leading-8 text-ink/78 sm:text-[16px] lg:text-[17px]">
+                Situee au coeur de Toulon, la piscine du Port Marchand est le lieu principal d&apos;entrainement
+                et de competition du club.
+              </p>
+              <div className="mt-8 space-y-4">
+                {[
+                  "Bassin de 25m adapte a la competition",
+                  "Gradins et accueil du public",
+                  "Vestiaires modernes et equipements dedies",
+                  "Acces facilite et stationnement a proximite",
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-3">
+                    <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-ember" />
+                    <p className="text-[15px] leading-7 text-ink/74">{item}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-8 rounded-[1.5rem] border border-ink/8 bg-white p-5 shadow-soft">
+                <p className="text-xs font-bold uppercase tracking-[0.26em] text-ink/45">Adresse</p>
+                <div className="mt-3 flex items-start gap-3">
+                  <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-ember" />
+                  <p className="text-base font-semibold text-ink">
+                    370 Allee de l&apos;Armee d&apos;Afrique, 83000 Toulon
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-[linear-gradient(135deg,#d5241d_0%,#bb1f1a_100%)] py-14 text-white md:py-[72px] lg:py-24">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_84%_26%,rgba(255,255,255,0.14),transparent_24%)]" />
+        <div className="relative mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
+          <p className="text-xs font-bold uppercase tracking-[0.38em] text-white/72">Rejoindre le club</p>
+          <h2 className="mt-4 text-4xl font-black uppercase tracking-tight sm:text-5xl">
+            Integrez un projet ambitieux
+          </h2>
+          <p className="mx-auto mt-6 max-w-3xl text-[15px] leading-8 text-white/92 sm:text-[16px] lg:text-[17px]">
+            Que vous soyez joueur debutant, confirme, parent ou partenaire, le Toulon Metropole Water-Polo 83 vous ouvre ses portes.
+          </p>
+          <p className="mx-auto mt-4 max-w-3xl text-[15px] leading-8 text-white/92 sm:text-[16px] lg:text-[17px]">
+            Rejoindre le club, c&apos;est integrer une structure serieuse, dynamique et tournee vers l&apos;avenir.
+          </p>
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
+            <Link
+              href="/contact"
+              className="button-sheen wave-light inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 font-bold uppercase tracking-[0.18em] text-ink transition-all hover:-translate-y-0.5 hover:bg-white/90"
+            >
+              Nous rejoindre
+            </Link>
+            <Link
+              href="/partenaires"
+              className="button-sheen inline-flex items-center gap-2 rounded-full border-2 border-white/35 px-8 py-4 font-bold uppercase tracking-[0.18em] text-white transition-all hover:-translate-y-0.5 hover:border-white hover:bg-white/10"
+            >
+              Devenir partenaire
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
 function ClubSection({ ffnStandings }: { ffnStandings: FfnStandingRow[] }) {
+  return <ClubSectionPremium ffnStandings={ffnStandings} />;
   const toulonStanding = ffnStandings.find((row) => isToulon(null, row.team));
 
   return (
@@ -2384,7 +2965,7 @@ function ClubSection({ ffnStandings }: { ffnStandings: FfnStandingRow[] }) {
             { v: "2010",  l: "Création" },
             { v: "150+",  l: "Licenciés" },
             { v: "8",     l: "Groupes" },
-            { v: toulonStanding ? `#${toulonStanding.rank}` : "FFN", l: "Classement" },
+            { v: toulonStanding ? `#${toulonStanding?.rank ?? ""}` : "FFN", l: "Classement" },
           ].map((s) => (
             <div key={s.l} className="py-6 text-center transition-colors duration-300 hover:bg-white/10">
               <p className="text-3xl font-black text-white lg:text-4xl">{s.v}</p>

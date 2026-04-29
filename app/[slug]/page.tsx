@@ -32,20 +32,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!page) return {};
 
   const ogImage = PAGE_OG_IMAGES[slug] || "/brand/og-image.png";
+  const description =
+    slug === "le-club"
+      ? "Histoire, vision et organisation du Toulon Metropole Water-Polo 83, club de water polo a Toulon reconnu dans le Var pour sa formation et sa performance."
+      : page.description;
 
   return {
     title: page.title,
-    description: page.description,
+    description,
     openGraph: {
       title: `${page.title} | TMWP83`,
-      description: page.description,
+      description,
       url: `https://toulonwaterpolo.fr/${slug}`,
       images: [{ url: ogImage, width: 1200, height: 630, alt: page.title }]
     },
     twitter: {
       card: "summary_large_image",
       title: `${page.title} | TMWP83`,
-      description: page.description,
+      description,
       images: [ogImage]
     }
   };
