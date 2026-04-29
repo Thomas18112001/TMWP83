@@ -206,7 +206,7 @@ img {
 }
 
 .interactive-panel:hover {
-  transform: translateY(-6px) scale(1.01);
+  transform: translateY(-6px);
   box-shadow: var(--shadow-premium-hover);
 }
 

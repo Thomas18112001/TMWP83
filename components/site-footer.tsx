@@ -5,25 +5,26 @@ import { CLUB_INFO, NAV_LINKS } from "@/lib/site-data";
 export function SiteFooter() {
   return (
     <footer className="bg-wp-black text-white">
-      <div className="border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 py-16 text-center sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight sm:text-5xl lg:text-6xl">
-            Rejoignez <span className="text-wp-red">l'élite</span>
+      <div className="relative overflow-hidden bg-wp-red">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.12),transparent_55%)]" />
+        <div className="relative max-w-7xl mx-auto px-4 py-20 text-center sm:px-6 lg:px-8">
+          <h2 className="mb-5 text-4xl font-extrabold uppercase tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Rejoignez l'élite
           </h2>
-          <p className="mx-auto mb-8 max-w-xl text-lg text-white/60">
+          <p className="mx-auto mb-10 max-w-xl text-lg text-white/80">
             Joueur, supporter, partenaire : chaque rôle compte dans la
             construction d'un projet d'excellence.
           </p>
           <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <Link
               href="/contact"
-              className="button-sheen wave-red inline-flex items-center justify-center rounded-full bg-wp-red px-8 py-4 font-bold uppercase tracking-wider text-white transition-all duration-500 ease-out hover:scale-[1.025] hover:bg-wp-red-dark"
+              className="button-sheen wave-ghost inline-flex items-center justify-center rounded-full bg-white px-8 py-4 font-bold uppercase tracking-wider text-wp-red transition-all duration-300 hover:scale-[1.025] hover:bg-white/90"
             >
               Nous rejoindre
             </Link>
             <Link
               href="/partenaires"
-              className="button-sheen wave-ghost inline-flex items-center justify-center rounded-full border-2 border-white/30 px-8 py-4 font-bold uppercase tracking-wider text-white transition-all duration-300 hover:border-white hover:bg-white/5"
+              className="button-sheen inline-flex items-center justify-center rounded-full border-2 border-white/60 px-8 py-4 font-bold uppercase tracking-wider text-white transition-all duration-300 hover:border-white hover:bg-white/15"
             >
               Devenir partenaire
             </Link>

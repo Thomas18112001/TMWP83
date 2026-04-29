@@ -21,7 +21,7 @@ export function generateMetadata({ params }: Props): Metadata {
       type: "article",
       title: article.title,
       description: article.excerpt,
-      url: `https://tmwp83.fr/actualites/${article.slug}`,
+      url: `https://toulonwaterpolo.fr/actualites/${article.slug}`,
       publishedTime: article.date,
       images: [{ url: article.image, width: 1200, height: 630, alt: article.imageAlt }]
     },

@@ -1,16 +1,7 @@
-import type { Metadata } from "next";
-import { Suspense } from "react";
-import { LoginForm } from "./LoginForm";
+import { redirect } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Accès privé — TMWP83",
-  robots: { index: false, follow: false },
-};
+const APP_URL = (process.env.NEXT_PUBLIC_TMWP_APP_URL || "https://app.toulonwaterpolo.fr").replace(/\/+$/, "");
 
-export default function LoginPage() {
-  return (
-    <Suspense>
-      <LoginForm />
-    </Suspense>
-  );
+export default function LoginRedirectPage() {
+  redirect(`${APP_URL}/login`);
 }

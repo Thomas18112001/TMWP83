@@ -1,0 +1,42 @@
+﻿{
+  "source": "TMWP83 Strapi collection activities via public proxy",
+  "endpointEnv": "TMWP_PUBLIC_STRAPI_URL or NEXT_PUBLIC_TMWP_API_URL",
+  "fallbackEndpoint": "http://127.0.0.1:8787/api/strapi",
+  "filters": {
+    "visibility": "active",
+    "status": ["open", "full", "closed"]
+  },
+  "publicFields": [
+    "id",
+    "documentId",
+    "name",
+    "slug",
+    "type",
+    "practiceType",
+    "category",
+    "level",
+    "audience",
+    "ageRange",
+    "shortDescription",
+    "longDescription",
+    "heroImageUrl",
+    "schedule",
+    "timeSlots",
+    "location",
+    "address",
+    "coach",
+    "registrationStatus",
+    "visibility",
+    "displayOrder",
+    "planningColor",
+    "ctaLabel",
+    "monthlyPrice",
+    "capacity",
+    "enrolled",
+    "price",
+    "season",
+    "status"
+  ],
+  "planningRule": "Use activities.timeSlots first; parse schedule only as fallback.",
+  "privacyRule": "Do not read members, registrations, payments, documents or admin/member private data for public pages."
+}

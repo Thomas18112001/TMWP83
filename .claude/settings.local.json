@@ -26,7 +26,9 @@
       "Bash(tar --exclude='./node_modules' --exclude='./.next' --exclude='./.git' --exclude='./.env*' --exclude='./base44.css' --exclude='./public/images' --exclude='./public/generated' -czf ~/tmwp83-src.tar.gz .)",
       "Read(//c/Users/Thoma/**)",
       "Bash(python3 -c ' *)",
-      "Bash(tar tzf *)"
+      "Bash(tar tzf *)",
+      "Bash(python deploy_public.py)",
+      "Bash(python -c \"import paramiko; print\\('paramiko OK'\\)\")"
     ]
   }
 }

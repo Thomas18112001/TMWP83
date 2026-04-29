@@ -19,7 +19,7 @@ export const CLUB_INFO = {
   address: "370 All. de l'Armée d'Afrique, 83000 Toulon",
   email: "contact@toulonwaterpolo.fr",
   phone: "+33 (0)6 15 16 14 21",
-  website: "https://tmwp83.fr",
+  website: "https://toulonwaterpolo.fr",
   social: {
     instagram: "https://www.instagram.com/toulon_waterpolo_/",
     facebook: "https://www.facebook.com/toulonwaterpolo.fr/",
@@ -29,13 +29,18 @@ export const CLUB_INFO = {
 
 export const NAV_LINKS = [
   { label: "Le Club", href: "/le-club" },
-  { label: "Équipe Élite", href: "/equipe-feminine-elite" },
   { label: "Équipes", href: "/equipes" },
   { label: "Compétitions", href: "/competitions" },
-  { label: "Partenaires", href: "/partenaires" },
+  { label: "Activités", href: "/activites" },
   { label: "Actualités", href: "/actualites" },
+  { label: "Partenaires", href: "/partenaires" },
   { label: "Contact", href: "/contact" }
 ] as const;
+
+export const ELITE_TEAM_LINK = {
+  label: "Élite féminine",
+  href: "/equipes/feminine-elite",
+} as const;
 
 const partnerLogoPath = (fileName: string) =>
   encodeURI(`/partenaires/${fileName}`);
@@ -235,7 +240,7 @@ export const TEAM_PILLARS = [
     description:
       "Référence du projet sportif et vitrine de la filière performance.",
     cta: "Voir l'équipe Élite",
-    href: "/equipe-feminine-elite",
+    href: "/equipes/feminine-elite",
     icon: Trophy,
     highlight: true
   },
@@ -256,159 +261,6 @@ export const TEAM_PILLARS = [
     href: "/contact",
     icon: Waves,
     highlight: false
-  }
-];
-
-export const ELITE_PLAYERS = [
-  { name: "Marie Dupont", number: 1, position: "Gardienne" },
-  { name: "Léa Martin", number: 3, position: "Centre" },
-  { name: "Camille Bernard", number: 5, position: "Ailière" },
-  { name: "Sarah Petit", number: 7, position: "Ailière" },
-  { name: "Julie Moreau", number: 9, position: "Centre" },
-  { name: "Emma Laurent", number: 11, position: "Buteuse" },
-  { name: "Chloé Dubois", number: 2, position: "Défenseure" },
-  { name: "Manon Thomas", number: 4, position: "Buteuse" },
-  { name: "Clara Robert", number: 6, position: "Défenseure" },
-  { name: "Inès Richard", number: 8, position: "Centre" },
-  { name: "Zoé Simon", number: 10, position: "Gardienne" },
-  { name: "Jade Michel", number: 12, position: "Ailière" },
-  { name: "Lina Garcia", number: 13, position: "Buteuse" }
-];
-
-export const UPCOMING_MATCHES = [
-  {
-    id: 1,
-    competition: "Championnat Élite",
-    home: "TMWP83",
-    away: "CN Marseille",
-    date: "2026-04-19",
-    time: "18:00",
-    location: "Piscine Port Marchand",
-    isHome: true
-  },
-  {
-    id: 2,
-    competition: "Coupe de France",
-    home: "Nice Water-Polo",
-    away: "TMWP83",
-    date: "2026-04-26",
-    time: "15:30",
-    location: "Piscine Jean Bouin, Nice",
-    isHome: false
-  },
-  {
-    id: 3,
-    competition: "Championnat Élite",
-    home: "TMWP83",
-    away: "Montpellier WP",
-    date: "2026-05-03",
-    time: "18:00",
-    location: "Piscine Port Marchand",
-    isHome: true
-  }
-];
-
-export const RECENT_RESULTS = [
-  {
-    home: "TMWP83",
-    away: "Lille Aqua",
-    scoreHome: 12,
-    scoreAway: 8,
-    date: "2026-04-05",
-    competition: "Championnat Élite"
-  },
-  {
-    home: "Lyon WP",
-    away: "TMWP83",
-    scoreHome: 9,
-    scoreAway: 11,
-    date: "2026-03-29",
-    competition: "Championnat Élite"
-  },
-  {
-    home: "TMWP83",
-    away: "Paris WP",
-    scoreHome: 14,
-    scoreAway: 7,
-    date: "2026-03-22",
-    competition: "Coupe de France"
-  },
-  {
-    home: "Bordeaux WP",
-    away: "TMWP83",
-    scoreHome: 10,
-    scoreAway: 10,
-    date: "2026-03-15",
-    competition: "Championnat Élite"
-  }
-];
-
-export const RANKINGS = [
-  {
-    rank: 1,
-    team: "TMWP83",
-    played: 18,
-    won: 14,
-    drawn: 2,
-    lost: 2,
-    goalsFor: 198,
-    goalsAgainst: 132,
-    points: 44
-  },
-  {
-    rank: 2,
-    team: "CN Marseille",
-    played: 18,
-    won: 13,
-    drawn: 1,
-    lost: 4,
-    goalsFor: 185,
-    goalsAgainst: 140,
-    points: 40
-  },
-  {
-    rank: 3,
-    team: "Nice Water-Polo",
-    played: 18,
-    won: 11,
-    drawn: 3,
-    lost: 4,
-    goalsFor: 170,
-    goalsAgainst: 145,
-    points: 36
-  },
-  {
-    rank: 4,
-    team: "Montpellier WP",
-    played: 18,
-    won: 10,
-    drawn: 2,
-    lost: 6,
-    goalsFor: 160,
-    goalsAgainst: 150,
-    points: 32
-  },
-  {
-    rank: 5,
-    team: "Lyon WP",
-    played: 18,
-    won: 9,
-    drawn: 2,
-    lost: 7,
-    goalsFor: 155,
-    goalsAgainst: 152,
-    points: 29
-  },
-  {
-    rank: 6,
-    team: "Paris WP",
-    played: 18,
-    won: 7,
-    drawn: 3,
-    lost: 8,
-    goalsFor: 142,
-    goalsAgainst: 155,
-    points: 24
   }
 ];
 
@@ -523,7 +375,7 @@ export function getArticleBySlug(slug: string) {
 
 export const pageSlugs = [
   "le-club",
-  "equipe-feminine-elite",
+  "activites",
   "equipes",
   "competitions",
   "partenaires",
@@ -531,7 +383,7 @@ export const pageSlugs = [
   "contact"
 ] as const;
 
-export type PageSlug = (typeof pageSlugs)[number];
+export type PageSlug = (typeof pageSlugs)[number] | "equipe-feminine-elite";
 
 export type PageContent = {
   slug: PageSlug;
@@ -540,6 +392,12 @@ export type PageContent = {
 };
 
 const pages: PageContent[] = [
+  {
+    slug: "activites",
+    title: "Activités & inscriptions",
+    description:
+      "Point d'entrée vers les inscriptions, le panier et l'espace adhérent."
+  },
   {
     slug: "le-club",
     title: "Le Club",
@@ -550,19 +408,19 @@ const pages: PageContent[] = [
     slug: "equipe-feminine-elite",
     title: "Équipe Féminine Élite",
     description:
-      "Le fer de lance du projet sportif. Ambition, exigence et performance au plus haut niveau national."
+      "Le fer de lance du projet sportif : calendrier FFN, résultats, effectif confirmé et ambition nationale."
   },
   {
     slug: "equipes",
     title: "Les Équipes",
     description:
-      "Le TMWP83 structure son projet sportif autour de trois filières complémentaires, de la formation à la performance."
+      "Du parcours de formation à l'Élite féminine, le TMWP83 structure une filière sportive complète."
   },
   {
     slug: "competitions",
     title: "Compétitions",
     description:
-      "Retrouvez les prochaines rencontres de l'équipe Élite et venez soutenir vos joueuses."
+      "Matchs, résultats et classement de l'équipe féminine Élite, directement depuis les données FFN."
   },
   {
     slug: "partenaires",

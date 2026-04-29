@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import "@/styles/globals.css";
-import { FrontEndEditor } from "@/components/front-end-editor";
 import { SiteCursor } from "@/components/site-cursor";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
-const SITE_URL = "https://tmwp83.fr";
+const SITE_URL = "https://toulonwaterpolo.fr";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -47,9 +45,9 @@ export const metadata: Metadata = {
     images: ["/brand/og-image.png"]
   },
   robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true }
+    index: false,
+    follow: false,
+    googleBot: { index: false, follow: false }
   },
   icons: {
     icon: "/brand/favicon.webp",
@@ -63,14 +61,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Role is set by middleware from the verified JWT — not spoofable via cookies
-  const role = headers().get("x-user-role");
-  const isAuthenticated = !!role;
-  const isEditor = role === "editor";
-
   return (
     <html lang="fr" suppressHydrationWarning>
       <head>
+        <meta name="robots" content="noindex, nofollow" />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||(!t&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.classList.add("dark")}}catch(e){}})();`
@@ -84,9 +78,9 @@ export default function RootLayout({
               "@type": "SportsOrganization",
               "name": "Toulon Métropole Water-Polo 83",
               "alternateName": "TMWP83",
-              "url": "https://tmwp83.fr",
-              "logo": "https://tmwp83.fr/brand/logo-light.png",
-              "image": "https://tmwp83.fr/brand/og-image.png",
+              "url": "https://toulonwaterpolo.fr",
+              "logo": "https://toulonwaterpolo.fr/brand/logo-light.png",
+              "image": "https://toulonwaterpolo.fr/brand/og-image.png",
               "description": "Club de water-polo à Toulon, dans le Var. Équipe féminine élite, école de water-polo dès 8 ans, compétitions nationales.",
               "sport": "Water Polo",
               "foundingDate": "2010",
@@ -120,19 +114,12 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-shell text-ink antialiased">
-        {isAuthenticated ? (
-          <>
-            <SiteCursor />
-            <div className="relative min-h-screen overflow-x-hidden">
-              <SiteHeader />
-              <main>{children}</main>
-              <SiteFooter />
-              <FrontEndEditor isEditor={isEditor} />
-            </div>
-          </>
-        ) : (
-          children
-        )}
+        <SiteCursor />
+        <div className="relative min-h-screen overflow-x-hidden">
+          <SiteHeader />
+          <main>{children}</main>
+          <SiteFooter />
+        </div>
       </body>
     </html>
   );
