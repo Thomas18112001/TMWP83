@@ -35,6 +35,7 @@ INCLUDE_PUBLIC_SUBDIRS = ["brand", "generated", "partenaires"]
 INCLUDE_PUBLIC_FILES = ["robots.txt"]
 INCLUDE_FILES = [
     "middleware.ts",
+    "proxy.ts",
     "next.config.js",
     "package.json",
     "package-lock.json",
