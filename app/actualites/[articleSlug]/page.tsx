@@ -5,14 +5,15 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { NEWS_ARTICLES, getArticleBySlug } from "@/lib/site-data";
 
-type Props = { params: { articleSlug: string } };
+type Props = { params: Promise<{ articleSlug: string }> };
 
 export function generateStaticParams() {
   return NEWS_ARTICLES.map((a) => ({ articleSlug: a.slug }));
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const article = getArticleBySlug(params.articleSlug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { articleSlug } = await params;
+  const article = getArticleBySlug(articleSlug);
   if (!article) return {};
   return {
     title: article.title,
@@ -34,11 +35,12 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export default function ArticlePage({ params }: Props) {
-  const article = getArticleBySlug(params.articleSlug);
+export default async function ArticlePage({ params }: Props) {
+  const { articleSlug } = await params;
+  const article = getArticleBySlug(articleSlug);
   if (!article) notFound();
 
-  const others = NEWS_ARTICLES.filter((a) => a.slug !== params.articleSlug).slice(0, 3);
+  const others = NEWS_ARTICLES.filter((a) => a.slug !== articleSlug).slice(0, 3);
 
   const formattedDate = new Date(article.date).toLocaleDateString("fr-FR", {
     day: "numeric",

@@ -202,7 +202,7 @@ export function HomePage({
 /* ── Partners Strip ─────────────────────────────────────── */
 function HomeHeroPremium() {
   return (
-    <section className="relative -mb-px min-h-[92svh] sm:min-h-[82vh] overflow-hidden bg-ink">
+    <section className="home-hero relative -mb-px overflow-hidden bg-ink">
       <Image
         src={IMG.equipeelite}
         alt="Joueuse du Toulon Métropole Water-Polo 83 en action pendant un match"
@@ -216,33 +216,33 @@ function HomeHeroPremium() {
       <div className="absolute inset-0 bg-gradient-to-r from-ink/88 via-ink/58 to-transparent" />
 
       <div className="absolute inset-x-0 bottom-0 z-10">
-        <div className="mx-auto max-w-7xl px-4 pb-16 pt-28 sm:px-6 lg:px-8 lg:pb-24 lg:pt-36">
+        <div className="home-hero__inner mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal>
-            <div className="max-w-[760px]">
-              <p className="mb-5 text-xs font-bold uppercase tracking-[0.32em] !text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]">
+            <div className="home-hero__content">
+              <p className="home-hero__eyebrow font-bold uppercase !text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]">
                 Toulon · Var · Depuis 2010
               </p>
-              <h1 className="max-w-4xl break-words text-4xl font-black leading-[0.98] text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)] sm:text-5xl md:text-6xl lg:text-[5.1rem]">
+              <h1 className="home-hero__title break-words font-black text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)]">
                 Toulon M&eacute;tropole
                 <span className="mt-2 block">Water-Polo 83</span>
               </h1>
-              <p className="mt-6 max-w-2xl text-base font-medium leading-7 text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.75)] sm:text-lg">
+              <p className="home-hero__text font-medium text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.75)]">
                 Le club toulonnais de r&eacute;f&eacute;rence pour pratiquer le water polo &agrave; Toulon :
                 &eacute;quipe &eacute;lite f&eacute;minine, formation des jeunes d&egrave;s 8 ans, activit&eacute;s sportives
                 et accompagnement pour rejoindre le club toute la saison.
               </p>
-              <div className="mt-9 flex flex-wrap gap-3">
+              <div className="home-hero__actions flex flex-wrap">
                 <Link
                   href="/activites"
                   data-cursor="interactive"
-                  className="button-sheen wave-red inline-flex items-center justify-center rounded-full border border-ember/20 bg-gradient-to-r from-ember via-[#e33b2d] to-wp-red-dark px-7 py-3.5 text-sm font-bold uppercase tracking-[0.16em] text-white shadow-[0_18px_40px_rgba(213,36,29,0.32)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_26px_56px_rgba(213,36,29,0.42)]"
+                  className="home-hero__button button-sheen wave-red inline-flex items-center justify-center rounded-full border border-ember/20 bg-gradient-to-r from-ember via-[#e33b2d] to-wp-red-dark font-bold uppercase tracking-[0.16em] text-white shadow-[0_18px_40px_rgba(213,36,29,0.32)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_26px_56px_rgba(213,36,29,0.42)]"
                 >
                   Voir les activit&eacute;s
                 </Link>
                 <Link
                   href="/contact"
                   data-cursor="interactive"
-                  className="button-sheen wave-ghost inline-flex items-center justify-center rounded-full border border-white/24 bg-white/8 px-7 py-3.5 text-sm font-bold uppercase tracking-[0.16em] text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-white/45 hover:bg-white/15"
+                  className="home-hero__button button-sheen wave-ghost inline-flex items-center justify-center rounded-full border border-white/24 bg-white/8 font-bold uppercase tracking-[0.16em] text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-white/45 hover:bg-white/15"
                 >
                   Nous rejoindre
                 </Link>
@@ -1164,10 +1164,10 @@ function HomeFindYourPlace({
   activitiesStatus: PublicActivitiesStatus;
 }) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const featuredActivities = activities.slice(0, 6);
+  const featuredActivities = activities.slice(0, 3);
 
   return (
-    <section className="overflow-x-hidden bg-white py-20 lg:py-28 dark:bg-[#13151a]">
+    <section className="home-activities-section bg-white py-20 lg:py-28 dark:bg-[#13151a]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Reveal className="mb-12 text-center">
           <p className="text-xs font-bold uppercase tracking-[0.38em] text-ember">
@@ -1273,83 +1273,97 @@ function HomeFindYourPlace({
               dès publication des prochains créneaux.
             </div>
           ) : (
-            <div className="relative -mx-4 px-4 py-6 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-              <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto overscroll-x-contain scroll-px-4 pb-10 pt-4 sm:scroll-px-6 lg:scroll-px-8 [scrollbar-width:thin]">
-              {featuredActivities.map((activity, index) => {
-                const disabled = activityIsDisabled(activity);
-                const imageSrc = activity.heroImageUrl || [IMG.resort, IMG.under, IMG.team][index % 3];
-                const categoryLabel = (activity.category || activity.practiceType || "Activité")
-                  .replace(/ecole/gi, "École")
-                  .replace(/water[- ]?polo/gi, "Water-Polo");
-                const description =
-                  activity.shortDescription ||
-                  activity.longDescription ||
-                  "Créneau encadré par le club pour progresser dans l'eau, découvrir les bases du water polo et rejoindre une dynamique collective à partir de 8 ans.";
-                const enrichedDescription = `${description} ${activity.ageRange || activity.audience ? `Public : ${activity.ageRange || activity.audience}.` : "Activité accessible à partir de 8 ans selon les groupes disponibles."}`;
+            <>
+              <div className="home-activities-grid">
+                {featuredActivities.map((activity, index) => {
+                  const disabled = activityIsDisabled(activity);
+                  const imageSrc = activity.heroImageUrl || [IMG.resort, IMG.under, IMG.team][index % 3];
+                  const categoryLabel = (activity.category || activity.practiceType || "Activité")
+                    .replace(/ecole/gi, "École")
+                    .replace(/water[- ]?polo/gi, "Water-Polo");
+                  const description =
+                    activity.shortDescription ||
+                    activity.longDescription ||
+                    "Créneau encadré par le club pour progresser dans l'eau, découvrir les bases du water polo et rejoindre une dynamique collective à partir de 8 ans.";
+                  const enrichedDescription = `${description} ${activity.ageRange || activity.audience ? `Public : ${activity.ageRange || activity.audience}.` : "Activité accessible à partir de 8 ans selon les groupes disponibles."}`;
 
-                return (
-                  <article
-                    key={activity.id}
-                    className="group my-2 flex min-w-[290px] snap-start flex-col overflow-hidden rounded-[1.5rem] border border-ink/8 bg-white shadow-soft transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-ember/25 hover:shadow-[0_26px_70px_rgba(15,23,42,0.16)] sm:min-w-[340px] lg:min-w-[360px] last:mr-4 lg:last:mr-8"
-                  >
-                    <Link href={publicActivityPath(activity)} className="relative block h-52 overflow-hidden rounded-t-[1.5rem] bg-ink/5">
-                      <Image
-                        src={imageSrc}
-                        alt={activity.name}
-                        fill
-                        sizes="(max-width: 768px) 85vw, 360px"
-                        className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-ink/55 to-transparent" />
-                      <span className="absolute left-4 top-4 max-w-[calc(100%-2rem)] rounded-full border border-white/20 bg-ink/82 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-white shadow-[0_10px_24px_rgba(0,0,0,0.24)] backdrop-blur-md">
-                        {categoryLabel}
-                      </span>
-                    </Link>
-                    <div className="flex flex-1 flex-col p-6">
-                      <h4 className="text-xl font-black uppercase leading-tight text-ink">
-                        {activity.name}
-                      </h4>
-                      <p className="mt-3 flex-1 text-sm leading-7 text-ink/60">
-                        {enrichedDescription}
-                      </p>
-                      <p className="mt-4 text-xs font-bold uppercase tracking-[0.16em] text-ember">
-                        {activityScheduleLabel(activity)} · {activityPriceLabel(activity)}
-                      </p>
-                      <div className="mt-6 flex flex-wrap gap-3">
-                        <Link
-                          href={publicActivityPath(activity)}
-                          className="button-sheen wave-light inline-flex items-center justify-center rounded-full border border-ink/10 bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-ink transition hover:-translate-y-0.5"
-                        >
-                          En savoir plus
-                        </Link>
-                        <a
-                          href={disabled ? undefined : activityAppUrl(activity)}
-                          aria-disabled={disabled}
-                          className={`button-sheen wave-red inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] ${
-                            disabled
-                              ? "pointer-events-none bg-ink/8 text-ink/40"
-                              : "bg-ember text-white"
-                          }`}
-                        >
-                          {disabled ? activityStatusLabel(activity) : "S'inscrire"}
-                        </a>
+                  return (
+                    <article
+                      key={activity.id}
+                      className="home-activity-card group flex flex-col overflow-hidden rounded-[1.5rem] border border-ink/8 bg-white transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1.5 hover:border-ember/25 dark:bg-[#1c1f28] dark:border-white/8"
+                    >
+                      <Link href={publicActivityPath(activity)} className="relative block h-52 overflow-hidden rounded-t-[1.5rem] bg-ink/5">
+                        <Image
+                          src={imageSrc}
+                          alt={activity.name}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                          className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-ink/55 to-transparent" />
+                        <span className="absolute left-4 top-4 max-w-[calc(100%-2rem)] rounded-full border border-white/20 bg-ink/82 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-white shadow-[0_10px_24px_rgba(0,0,0,0.24)] backdrop-blur-md">
+                          {categoryLabel}
+                        </span>
+                      </Link>
+                      <div className="flex flex-1 flex-col p-6">
+                        <h4 className="text-xl font-black uppercase leading-tight text-ink">
+                          {activity.name}
+                        </h4>
+                        <p className="mt-3 flex-1 text-sm leading-7 text-ink/60">
+                          {enrichedDescription}
+                        </p>
+                        <p className="mt-4 text-xs font-bold uppercase tracking-[0.16em] text-ember">
+                          {activityScheduleLabel(activity)} · {activityPriceLabel(activity)}
+                        </p>
+                        <div className="mt-6 flex flex-wrap gap-3">
+                          <Link
+                            href={publicActivityPath(activity)}
+                            className="button-sheen wave-light inline-flex items-center justify-center rounded-full border border-ink/10 bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-ink transition hover:-translate-y-0.5"
+                          >
+                            En savoir plus
+                          </Link>
+                          <a
+                            href={disabled ? undefined : activityAppUrl(activity)}
+                            aria-disabled={disabled}
+                            className={`button-sheen wave-red inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] ${
+                              disabled
+                                ? "pointer-events-none bg-ink/8 text-ink/40"
+                                : "bg-ember text-white"
+                            }`}
+                          >
+                            {disabled ? activityStatusLabel(activity) : "S'inscrire"}
+                          </a>
+                        </div>
                       </div>
-                    </div>
-                  </article>
-                );
-              })}
+                    </article>
+                  );
+                })}
+                <article id="home-activities-all" className="home-activity-card home-activity-card--cta flex flex-col justify-between rounded-[1.5rem] border border-ember/20 bg-[#1C1C1C] p-7 text-white">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.24em] text-ember">
+                      Toutes les sections
+                    </p>
+                    <h4 className="mt-4 text-2xl font-black uppercase leading-tight">
+                      Voir toutes les activités
+                    </h4>
+                    <p className="mt-4 text-sm leading-7 text-white/68">
+                      Retrouvez toutes les sections, horaires et informations d'inscription.
+                    </p>
+                  </div>
+                  <Link
+                    href="/activites"
+                    className="button-sheen wave-red mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-ember px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:-translate-y-0.5"
+                  >
+                    Voir toutes les activités
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </article>
               </div>
-            </div>
+              <p className="mt-6 text-center text-sm font-medium text-ink/45">
+                D'autres sections sont disponibles sur la page activités.
+              </p>
+            </>
           )}
-          <div className="mt-8 text-center">
-            <Link
-              href="/activites"
-              className="button-sheen wave-dark inline-flex items-center gap-2 rounded-full border border-ink/10 bg-ink px-6 py-3 text-sm font-bold uppercase tracking-[0.16em] text-white transition-all duration-300 hover:-translate-y-0.5"
-            >
-              Voir les activités
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
         </div>
       </div>
     </section>

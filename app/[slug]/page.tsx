@@ -6,9 +6,9 @@ import { getPublicActivities } from "@/lib/public-activities";
 import { getPageContent, pageSlugs } from "@/lib/site-data";
 
 type PageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export function generateStaticParams() {
@@ -25,12 +25,13 @@ const PAGE_OG_IMAGES: Record<string, string> = {
   "contact":               "/images/piscine-port-marchand-toulon-bassin-exterieur.jpg"
 };
 
-export function generateMetadata({ params }: PageProps): Metadata {
-  const page = getPageContent(params.slug);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const page = getPageContent(slug);
 
   if (!page) return {};
 
-  const ogImage = PAGE_OG_IMAGES[params.slug] || "/brand/og-image.png";
+  const ogImage = PAGE_OG_IMAGES[slug] || "/brand/og-image.png";
 
   return {
     title: page.title,
@@ -38,7 +39,7 @@ export function generateMetadata({ params }: PageProps): Metadata {
     openGraph: {
       title: `${page.title} | TMWP83`,
       description: page.description,
-      url: `https://toulonwaterpolo.fr/${params.slug}`,
+      url: `https://toulonwaterpolo.fr/${slug}`,
       images: [{ url: ogImage, width: 1200, height: 630, alt: page.title }]
     },
     twitter: {
@@ -51,14 +52,15 @@ export function generateMetadata({ params }: PageProps): Metadata {
 }
 
 export default async function DynamicPage({ params }: PageProps) {
-  const page = getPageContent(params.slug);
+  const { slug } = await params;
+  const page = getPageContent(slug);
 
   if (!page) {
     notFound();
   }
 
-  const needsFFN = params.slug === "competitions" || params.slug === "le-club";
-  const needsActivities = params.slug === "activites";
+  const needsFFN = slug === "competitions" || slug === "le-club";
+  const needsActivities = slug === "activites";
 
   const [ffnFixtures, ffnResults, ffnStandings, activities] = await Promise.all([
     needsFFN ? getFfnFixtures() : Promise.resolve([]),

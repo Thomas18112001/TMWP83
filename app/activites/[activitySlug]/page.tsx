@@ -5,7 +5,7 @@ import { ArrowLeft, CalendarDays, Clock3, MapPin, Trophy, UserRound, Users, Wave
 import { getPublicActivityBySlug } from "@/lib/public-activities";
 import type { PublicActivity, PublicActivitySlot } from "@/lib/public-activities";
 
-type PageProps = { params: { activitySlug: string } };
+type PageProps = { params: Promise<{ activitySlug: string }> };
 
 const APP_URL = (process.env.NEXT_PUBLIC_TMWP_APP_URL || "https://app.toulonwaterpolo.fr").replace(/\/+$/, "");
 const DAY_ORDER: PublicActivitySlot["day"][] = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
@@ -15,7 +15,8 @@ const DAY_LABELS: Record<PublicActivitySlot["day"], string> = {
 };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const activity = await getPublicActivityBySlug(params.activitySlug);
+  const { activitySlug } = await params;
+  const activity = await getPublicActivityBySlug(activitySlug);
   if (!activity) return { title: "Activité introuvable" };
   return {
     title: activity.name,
@@ -84,7 +85,8 @@ function groupedSlots(activity: PublicActivity) {
 }
 
 export default async function ActivityDetailPage({ params }: PageProps) {
-  const activity = await getPublicActivityBySlug(params.activitySlug);
+  const { activitySlug } = await params;
+  const activity = await getPublicActivityBySlug(activitySlug);
   if (!activity) notFound();
 
   const Icon = typeIcon(activity);
